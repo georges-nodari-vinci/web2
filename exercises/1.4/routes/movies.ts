@@ -83,7 +83,22 @@ router.get("/", (req, res) => {
     }
   }
 
-  return res.json(filteredMovies);
+  // Pagination
+  const page = Number(req.query["page"]) || 1; // Page par défaut 1
+  const limit = Number(req.query["limit"]) || 10; // Limite par défaut 10
+  const startIndex = (page - 1) * limit; // Index de début
+  const endIndex = startIndex + limit; // Index de fin
+
+  const paginatedMovies = filteredMovies.slice(startIndex, endIndex); // Obtenir les films de la page demandée
+
+  // Ajouter des informations de pagination à la réponse
+  const totalPages = Math.ceil(filteredMovies.length / limit);
+  res.json({
+    totalMovies: filteredMovies.length,
+    totalPages: totalPages,
+    currentPage: page,
+    movies: paginatedMovies,
+  });
 });
 
 router.get("/:id", (req, res) => {

@@ -38,4 +38,6 @@ GET {{baseUrl}}/movies?sortBy=title&sortOrder=asc
 GET {{baseUrl}}/movies?sortBy=duration&sortOrder=desc
 
 ### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Pour filtrer les films avec une durée minimale et trier par titre)
-GET {{baseUrl}}/movies?minimum-duration=150&sortBy=title&sortOrder=desc
+
+### READ ALL PAGINATION : Paginer toutes les ressources de la collection selon la page et la limite donné (Pour obtenir la première page avec une limite de 5 films)
+GET {{baseUrl}}/movies?page=1&limit=2
