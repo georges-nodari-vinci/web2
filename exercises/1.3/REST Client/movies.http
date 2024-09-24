@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/movies
+
+### READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
+GET {{baseUrl}}/movies?minimum-duration=140
+
+### READ ONE : Lire la ressource identifiée
+GET {{baseUrl}}/movies/1
+
+
+### CREATE ONE : Créer une ressource basée sur les données de la requête
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Interstellar",
+  "director": "Christopher Nolan",
+  "duration": -169,
+  "budget": -165,
+  "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+  "imageUrl": "https://example.com/interstellar.jpg"
+}
+
