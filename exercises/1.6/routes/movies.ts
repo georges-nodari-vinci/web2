@@ -51,6 +51,39 @@ const movies: Movie[] = [
   },
 ];
 
+function validateMovieProperties(body: unknown) {
+  const allowedProperties = new Set([
+    "title",
+    "director",
+    "duration",
+    "budget",
+    "description",
+    "imageUrl",
+  ]);
+
+  for (const key of Object.keys(body as object)) {
+    if (!allowedProperties.has(key)) {
+      return false; // Une propriété inattendue a été trouvée
+    }
+  }
+  return true; // Toutes les propriétés sont valides
+}
+
+function isValidMovieData(body: Partial<NewMovie>): body is NewMovie {
+  return (
+    typeof body.title === "string" &&
+    typeof body.director === "string" &&
+    typeof body.duration === "number" &&
+    body.duration > 0 &&
+    typeof body.budget === "number" &&
+    body.budget >= 0 &&
+    typeof body.description === "string" &&
+    typeof body.imageUrl === "string" &&
+    body.title.trim() !== "" &&
+    body.director.trim() !== "" &&
+    body.imageUrl.trim() !== ""
+  );
+}
 router.get("/", (req, res) => {
   let filteredMovies = movies;
 
@@ -270,27 +303,9 @@ router.put("/:id", (req, res) => {
   const id = Number(req.params.id);
   const body: unknown = req.body;
 
-  // Validation des paramètres reçus
   if (
-    !body ||
-    typeof body !== "object" ||
-    !("title" in body) ||
-    !("director" in body) ||
-    !("duration" in body) ||
-    !("budget" in body) ||
-    !("description" in body) ||
-    !("imageUrl" in body) ||
-    typeof body.title !== "string" ||
-    typeof body.director !== "string" ||
-    typeof body.duration !== "number" ||
-    body.duration <= 0 ||
-    typeof body.budget !== "number" ||
-    body.budget < 0 ||
-    typeof body.description !== "string" ||
-    typeof body.imageUrl !== "string" ||
-    !body.title.trim() ||
-    !body.director.trim() ||
-    !body.imageUrl.trim()
+    !validateMovieProperties(body as Partial<NewMovie>) ||
+    !isValidMovieData(body as Partial<NewMovie>)
   ) {
     return res.sendStatus(400); // Bad Request
   }

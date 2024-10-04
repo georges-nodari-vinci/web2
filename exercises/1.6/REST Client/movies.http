@@ -63,8 +63,8 @@ PUT {{baseUrl}}/movies/5
 Content-Type: application/json
 
 {
-    "title": "L'Aile ou la Cuisse",
-    "director": "Claude Zidi",
+    "title": "L'Aile odu la Cuisse",
+    "director": "Claude Ziddi",
     "duration": 90,
     "budget": 1000000,
     "description": "Un critique gastronomique et son fils se retrouvent dans une aventure incroyable.",
