@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/movies
+
+### READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
+GET {{baseUrl}}/movies?minimum-duration=140
+
+### READ ONE : Lire la ressource identifiée
+GET {{baseUrl}}/movies/1
+
+
+### CREATE ONE : Créer une ressource basée sur les données de la requête
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Interstellar",
+  "director": "Christopher Nolan",
+  "duration": 169,
+  "budget": 165,
+  "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+  "imageUrl": "https://example.com/interstellar.jpg"
+}
+
+
+### READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
+GET {{baseUrl}}/movies?title-starts-with=the
+
+### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Trier par titre en ordre décroissant)
+GET {{baseUrl}}/movies?sortBy=title&sortOrder=desc
+
+### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Trier par durée en ordre croissant)
+GET {{baseUrl}}/movies?sortBy=duration&sortOrder=asc
+
+### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Trier par titre en ordre croissant)
+GET {{baseUrl}}/movies?sortBy=title&sortOrder=asc
+
+### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Trier par durée en ordre décroissant)
+GET {{baseUrl}}/movies?sortBy=duration&sortOrder=desc
+
+### READ ALL SORT : Trier toutes les ressources de la collection selon le tri donné (Pour filtrer les films avec une durée minimale et trier par titre)
+
+### READ ALL PAGINATION : Paginer toutes les ressources de la collection selon la page et la limite donné (Pour obtenir la première page avec une limite de 5 films)
+GET {{baseUrl}}/movies?page=1&limit=2
+
+
+### Delete a movie identified by 5
+DELETE {{baseUrl}}/movies/5
+
+
+### Update the movie identified by 5
+PATCH {{baseUrl}}/movies/5
+Content-Type: application/json
+
+{
+    "title":"l'aile ou la cuisse",
+    "director":"Claude Zidi",
+    "duration":90,
+    "budget":1000000
+}
+
+### UPDATE ONE : update the movie identified by 5 with the given data (PUT) 
+PUT {{baseUrl}}/movies/5
+Content-Type: application/json
+
+{
+    "title": "L'Aile odu la Cuisse",
+    "director": "Claude Ziddi",
+    "duration": 90,
+    "budget": 1000000,
+    "description": "Un critique gastronomique et son fils se retrouvent dans une aventure incroyable.",
+    "imageUrl": "https://example.com/largeouclaise.jpg"
+}
+
+### CREATE ONE : create a new movie if it does not exist
+PUT {{baseUrl}}/movies/61
+Content-Type: application/json
+
+{
+    "title": "L'Aile ou la Cuisse",
+    "director": "Claude Zidi",
+    "duration": 90,
+    "budget": 1000000,
+    "description": "Un critique gastronomique et son fils se retrouvent dans une aventure incroyable.",
+    "imageUrl": "https://example.com/largeouclaise.jpg"
+}
