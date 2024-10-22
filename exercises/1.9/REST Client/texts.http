@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:3000
+### READ ALL TEXTS
+GET {{baseUrl}}/texts
+
+### READ ALL TEXT FILTERED BY LEVEL
+GET {{baseUrl}}/texts?level=medium
+
+### READ TEXT BY ID
+GET {{baseUrl}}/texts/b7cda11a-8e84-44b2-8476-4df0291c5fc1
+
+
+### CREATE TEXT
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content" : "Le nouveau a text3",
+    "level" : "easy"
+}
+
+### DELETE TEXT BY ID
+DELETE {{baseUrl}}/texts/ff328a93-64ca-463a-8cf1-f30372d0bf57
+
+### UPDATE TEXT BY ID
+PUT {{baseUrl}}/texts/3b3fa5b2-49e3-4a2d-bf8d-08c3ebca3f5f
+Content-Type: application/json
+
+{
+    "content": "Texte mis à jour",
+    "level": "easy"
+}
