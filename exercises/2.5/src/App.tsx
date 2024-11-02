@@ -24,6 +24,7 @@ function App() {
           count={count}
           handleClick={(count) => setCount(count + 1)}
           secretMessage="You are a master in the art of clicking !"
+          hoverMessage="Please click on me now!"
         />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
