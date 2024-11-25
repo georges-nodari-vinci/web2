@@ -1,4 +1,13 @@
-import { Container, Typography, Button, Grid } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Button,
+  Grid,
+  CardContent,
+  Card,
+} from "@mui/material";
+import myTopMovies from "./data/topMovies";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -20,6 +29,19 @@ const HomePage = () => {
           <Button variant="outlined" color="primary" href="/movies">
             Explorer tous nos films favoris
           </Button>
+        </Grid>
+        <Grid container spacing={4}>
+          {myTopMovies.map((movie) => (
+            <Grid item key={movie.id} xs={12} sm={6} md={4} mt={10}>
+              <Card>
+                <CardContent>
+                  <Typography>
+                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Container>

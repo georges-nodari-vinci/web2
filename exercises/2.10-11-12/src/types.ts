@@ -1,4 +1,5 @@
-interface IMovie {
+interface ITopMovie {
+  id: number;
   title: string;
   director: string;
   duration: number;
@@ -7,8 +8,15 @@ interface IMovie {
   budget?: number;
 }
 
+interface IMovie {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
 interface IMovieContext {
-  movies: IMovie[];
+  movies: ITopMovie[];
   title: string;
   director: string;
   duration: number;
@@ -26,4 +34,4 @@ interface IMovieContext {
   ) => void;
 }
 
-export type { IMovie, IMovieContext };
+export type { ITopMovie, IMovie, IMovieContext };

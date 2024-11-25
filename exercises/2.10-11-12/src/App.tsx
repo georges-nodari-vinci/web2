@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import { Box } from "@mui/material";
 import { IMovieContext } from "./types";
 import { useState } from "react";
-import myTopMovies from "./data/topMovie";
+import myTopMovies from "./data/topMovies";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -19,7 +19,13 @@ function App() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const nextId = movies.reduce((acc, movie) => {
+      return movie.id > acc ? movie.id : acc;
+    }, 0);
+
     const newMovie = {
+      id: nextId + 1,
       title,
       director,
       duration,
