@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,10 +7,13 @@ import RandomDog from "./components/RandomDog";
 function App() {
   const [refresh, setRefresh] = useState(0);
 
-  const handleRefresh = () => {
-    // Change state to force components to refresh their images
-    setRefresh((prev) => prev + 1);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefresh((prev) => prev + 1); // Change state to force remount of children
+    }, 5000);
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, []);
 
   return (
     <>
@@ -26,9 +29,6 @@ function App() {
       <RandomDog key={`dog-1-${refresh}`} />
       <RandomDog key={`dog-2-${refresh}`} />
       <RandomDog key={`dog-3-${refresh}`} />
-      <div className="card">
-        <button onClick={handleRefresh}>Get new dog images</button>
-      </div>
     </>
   );
 }
