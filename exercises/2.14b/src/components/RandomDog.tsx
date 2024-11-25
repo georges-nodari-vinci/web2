@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const RandomDog = () => {
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const fetchRandomDog = async () => {
     try {
@@ -17,11 +18,24 @@ const RandomDog = () => {
   };
 
   useEffect(() => {
-    fetchRandomDog(); // Fetch initial image on mount
-  }, []);
+    // Fetch an initial image when the component mounts
+    fetchRandomDog();
+
+    // Setup interval for regular updates
+    const interval = setInterval(() => {
+      if (!isHovered) {
+        fetchRandomDog(); // Only fetch if not hovered
+      }
+    }, 5000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [isHovered]); // Re-run effect when hover state changes
 
   return (
-    <div>
+    <div
+      onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+      onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
+    >
       {imageUrl ? (
         <img src={imageUrl} alt="A random dog" style={{ width: "200px" }} />
       ) : (
