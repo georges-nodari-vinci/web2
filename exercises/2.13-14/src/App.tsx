@@ -11,7 +11,7 @@ interface Joke {
 function App() {
   const [joke, setJoke] = useState<Joke | null>(null);
 
-  useEffect(() => {
+  const fetchJoke = () => {
     fetch("https://v2.jokeapi.dev/joke/Any?type=single")
       .then((response) => {
         if (!response.ok) {
@@ -21,6 +21,14 @@ function App() {
       })
       .then((data) => setJoke(data))
       .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    fetchJoke(); // Fetch une blague initialement
+
+    const intervalId = setInterval(fetchJoke, 10000); // Met à jour toutes les 10 secondes
+
+    return () => clearInterval(intervalId); // Nettoie l'intervalle quand le composant est démonté
   }, []);
 
   return (
@@ -35,7 +43,7 @@ function App() {
       </div>
       <p>{joke ? `category : ${joke.category}` : "Loading joke category..."}</p>
       <h1>{joke ? joke.joke : "Loading joke..."}</h1>
-      <button onClick={() => window.location.reload()}>Get another joke</button>
+      <button onClick={fetchJoke}>Get another joke</button>
     </>
   );
 }
