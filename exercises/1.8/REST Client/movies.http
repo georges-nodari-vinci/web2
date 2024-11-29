@@ -5,7 +5,7 @@ GET {{baseUrl}}/movies
 GET {{baseUrl}}/movies?minimum-duration=140
 
 ### READ ONE : Lire la ressource identifiée
-GET {{baseUrl}}/movies/2
+GET {{baseUrl}}/movies/12
 
 
 ### CREATE ONE : Créer une ressource basée sur les données de la requête
@@ -13,7 +13,7 @@ POST {{baseUrl}}/movies
 Content-Type: application/json
 
 {
-  "title": "Interstellar",
+  "title": "Interstellar11112",
   "director": "Christopher Nolan",
   "duration": 169,
   "budget": 165,

@@ -61,12 +61,10 @@ function readAllMovies({
   titleStartsWith,
   sortBy,
   sortOrder = "asc",
-  page = 1,
-  limit = 10,
 }: MovieSearchParams): {
   totalMovies: number;
-  totalPages: number;
-  currentPage: number;
+  // totalPages: number;
+  // currentPage: number;
   movies: Movie[];
 } {
   let movies: Movie[] = parse(jsonDbPath, []); // Typage des films
@@ -95,17 +93,17 @@ function readAllMovies({
   }
 
   // Pagination
-  const startIndex = (page - 1) * limit;
-  const endIndex = startIndex + limit;
+  // const startIndex = (page - 1) * limit;
+  // const endIndex = startIndex + limit;
 
-  const paginatedMovies = movies.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(movies.length / limit);
+  // const paginatedMovies = movies.slice(startIndex, endIndex);
+  // const totalPages = Math.ceil(movies.length / limit);
 
   return {
     totalMovies: movies.length,
-    totalPages,
-    currentPage: page,
-    movies: paginatedMovies,
+    // totalPages,
+    // currentPage: page,
+    movies: movies,
   };
 }
 
@@ -115,11 +113,10 @@ function readMovieById(id: number): Movie | undefined {
 
 function createMovie(newMovie: NewMovie): Movie {
   const nextId =
-    movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) +
-    1;
+    movies.reduce((maxId, movie) => Math.max(maxId, movie.id), 0) + 1;
   const movie = { ...newMovie, id: nextId };
-  const updatedMovies = [...movies, movie];
-  serialize(jsonDbPath, updatedMovies);
+  movies.push(movie);
+  serialize(jsonDbPath, movies);
   return movie;
 }
 

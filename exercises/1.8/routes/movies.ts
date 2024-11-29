@@ -54,18 +54,9 @@ router.post("/", (req, res) => {
     !("title" in body) ||
     !("director" in body) ||
     !("duration" in body) ||
-    !("budget" in body) ||
-    !("description" in body) ||
-    !("imageUrl" in body) ||
     typeof body.title !== "string" ||
     typeof body.director !== "string" ||
-    typeof body.duration !== "number" ||
-    typeof body.budget !== "number" ||
-    typeof body.description !== "string" ||
-    typeof body.imageUrl !== "string" ||
-    !body.title.trim() ||
-    !body.director.trim() ||
-    !body.imageUrl.trim()
+    typeof body.duration !== "number"
   ) {
     return res.sendStatus(400);
   }
