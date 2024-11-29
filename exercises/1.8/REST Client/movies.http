@@ -44,7 +44,7 @@ GET {{baseUrl}}/movies?page=1&limit=2
 
 
 ### Delete a movie identified by 5
-DELETE {{baseUrl}}/movies/7 
+DELETE {{baseUrl}}/movies/14
 
 
 ### Update the movie identified by 5
