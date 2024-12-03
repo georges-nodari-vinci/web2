@@ -133,9 +133,11 @@ app.use(cors(corsOptions));
 | URI                | Méthode HTTP | Auths? | Opération                                                                                                        |
 | ------------------ | ------------ | ------ | ---------------------------------------------------------------------------------------------------------------- |
 | **`comments`**     | GET          | Non    | READ ALL FILTERED : Lire tous les commentaires et permettre le filtrage par film                                 |
-| **`comments`**     | POST         | Oui    | CREATE ONE : Ajouter un commentaire sur un film, en y associant l'utilisateur ou l'utilisatrice authentifié(e)   |
-| **`comments/:id`** | DELETE       | Oui    | DELETE ONE : Effacer un commentaire sur un film en fonction de l'utilisateur ou de l'utilisatrice authentifié(e) |
+| **`comments`**     | POST         | JWT    | CREATE ONE : Ajouter un commentaire sur un film, en y associant l'utilisateur ou l'utilisatrice authentifié(e)   |
+| **`comments/:id`** | DELETE       | JWT    | DELETE ONE : Effacer un commentaire sur un film en fonction de l'utilisateur ou de l'utilisatrice authentifié(e) |
 
 # Crédit :
 
 - La configuration du projet pour utiliser TS & le linter a été reprise du cours de Fullstack Open (`Typing an Express app` : https://fullstackopen.com/en/part9/typing_an_express_app ainsi que via https://github.com/fullstack-hy2020/flight-diary).
+
+
