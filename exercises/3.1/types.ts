@@ -35,6 +35,15 @@ interface Movie {
 
 type NewMovie = Omit<Movie, "id">;
 
+interface Comment {
+  id: number;
+  movieId: number;
+  username: string;
+  content: string;
+}
+
+type NewComment = Omit<Comment, "id">;
+
 export type {
   AuthenticatedUser,
   User,
@@ -43,4 +52,6 @@ export type {
   JwtPayload,
   Movie,
   NewMovie,
+  Comment,
+  NewComment,
 };
